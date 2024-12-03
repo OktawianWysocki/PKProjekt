@@ -1,1 +1,1 @@
-
+#include"klasy.h"
