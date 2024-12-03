@@ -10,5 +10,12 @@ int main()
     //dadad/ad
     //adadadad/
     //adadaad
+    asd
+        asd
+    as
+        da
+    sd
+        aqsd
+    
 }
 
