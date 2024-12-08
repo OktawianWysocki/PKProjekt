@@ -41,35 +41,71 @@ double Arx::wykonaj_krok(double u) {
     return y;
 }
 
-double Sprzerzenie::uchyb() {
+PID::PID(double kp, double ti, double td)
+    : kp(kp), ti(ti), td(td), suma_uchybow(0.0), poprzedni_uchyb(0.0) {}
 
+// Składowa proporcjonalna
+double PID::obliczP(double uchyb) const {
+    return kp * uchyb;
 }
 
-double Sprzerzenie::wynikSprzerzenia() {
+// Składowa całkująca
+double PID::obliczI(double uchyb) {
+    if (ti == 0.0) {
+        return 0.0; // Część całkująca wyłączona
+    }
+    suma_uchybow += uchyb; // Aktualizacja sumy uchybów
+    return (1.0 / ti) * suma_uchybow;
+}
 
+// Składowa różniczkująca
+double PID::obliczD(double uchyb) {
+    double wynik = td * (uchyb - poprzedni_uchyb); // Przyrost uchybu
+    poprzedni_uchyb = uchyb; // Aktualizacja pamięci uchybu
+    return wynik;
+}
+
+// Całkowita wartość sterowania
+double PID::obliczSterowanie(double uchyb) {
+    double uP = obliczP(uchyb); // Składowa P
+    double uI = obliczI(uchyb); // Składowa I
+    double uD = obliczD(uchyb); // Składowa D
+    return uP + uI + uD;        // Suma wszystkich składowych
+}
+
+// Resetowanie stanu kontrolera
+void PID::reset() {
+    suma_uchybow = 0.0;
+    poprzedni_uchyb = 0.0;
+} 
+
+Sprzerzenie::Sprzerzenie(Arx* model, PID* pid, double wartosc_zadana)
+    : m_model(model), m_pid(pid), wartosc_zadana(wartosc_zadana), poprzednie_y(0.0) {}
+
+// Oblicza uchyb regulacji
+double Sprzerzenie::obliczUchyb(double aktualne_y) {
+    poprzednie_y = aktualne_y; // Aktualizacja poprzedniego y
+    return wartosc_zadana - poprzednie_y; // e(i) = w(i) - y_hat(i)
+}
+
+// Wykonuje krok symulacji
+double Sprzerzenie::wykonajKrok(double aktualne_y) {
+    // Oblicz uchyb
+    double uchyb = obliczUchyb(aktualne_y);
+
+    // Oblicz sterowanie PID
+    double sterowanie = m_pid->obliczSterowanie(uchyb);
+
+    // Przekaż sterowanie do modelu ARX i uzyskaj nowe y
+    double nowe_y = m_model->wykonaj_krok(sterowanie);
+
+    return nowe_y; // Zwraca nową wartość regulowaną
 }
 
 
 
-double Pid::algortmI() {
 
-}
 
-double Pid::algortmP() {
-
-}
-
-double Pid::algortmD() {
-
-}
-
-double Pid::sumaAlgorytmow() {
-
-}
-
-void Pid::reset() {
-
-}
 
 
 
