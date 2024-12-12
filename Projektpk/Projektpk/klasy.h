@@ -19,7 +19,7 @@ public:
     double wykonaj_krok(double u);
 };
 
-#endif // ARX_H
+#endif 
 
 
 #ifndef PID_H
@@ -49,7 +49,7 @@ public:
     void reset();
 };
 
-#endif // PID_H
+#endif 
 
 #ifndef SPRZERZENIE_H
 #define SPRZERZENIE_H
@@ -73,7 +73,7 @@ public:
     double wykonajKrok(double aktualne_y);
 };
 
-#endif // SPRZERZENIE_H
+#endif 
 
 #ifndef SYGNAL_H
 #define SYGNAL_H
@@ -110,7 +110,7 @@ public:
     double generuj(double t) const;
 };
 
-#endif // SYGNAL_H
+#endif 
 
 #ifndef SYMULACJA_H
 #define SYMULACJA_H
@@ -142,4 +142,4 @@ public:
     void ustawKrokCzasowy(double nowy_krok);
 };
 
-#endif // SYMULACJA_H
+#endif 
