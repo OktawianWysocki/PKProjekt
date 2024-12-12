@@ -60,7 +60,7 @@ private:
     Arx* m_model;      // Obiekt regulacji (model ARX)
     PID* m_pid;        // Regulator PID
     double wartosc_zadana; // Wartość zadana w(i)
-    double poprzednie_y;   // Wartość zmierzona (𝑦̂𝑖 = 𝑦𝑖−1)
+    double poprzednie_y;   // Wartość zmierzona (𝑦𝑖 = 𝑦𝑖−1)
 
 public:
     
