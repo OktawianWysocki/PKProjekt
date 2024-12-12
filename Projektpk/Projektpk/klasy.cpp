@@ -1,5 +1,5 @@
-#include"klasy.h"
-#include<iostream>
+#include "KLASY.H"
+#include <iostream>
 
 
 
@@ -103,8 +103,8 @@ double Sprzerzenie::wykonajKrok(double aktualne_y) {
 }
 
 // Implementacja klasy Sygnal
-Sygnal::Sygnal(double amplituda, double okres, double wypełnienie, double czas_aktywacji)
-    : amplituda(amplituda), okres(okres), wypełnienie(wypełnienie), czas_aktywacji(czas_aktywacji) {
+Sygnal::Sygnal(double amplituda, double okres, double wypelnienie, double czas_aktywacji)
+    : amplituda(amplituda), okres(okres), wypelnienie(wypelnienie), czas_aktywacji(czas_aktywacji) {
     ustawSkok(); // Domyślnie ustawiony skok jednostkowy
 }
 
@@ -123,7 +123,7 @@ void Sygnal::ustawSinus() {
 void Sygnal::ustawProstokat() {
     funkcja_sygnalu = [this](double t) {
         double modulo = std::fmod(t, okres);
-        return (modulo / okres) < wypełnienie ? amplituda : 0.0;
+        return (modulo / okres) < wypelnienie ? amplituda : 0.0;
         };
 }
 
@@ -140,7 +140,7 @@ Symulacja::Symulacja(Sprzerzenie* sprzerzenie, Sygnal* sygnal, double krok_czaso
 
 void Symulacja::start() {
     aktywna = true;
-    std::cout << "Symulacja rozpoczęta.\n";
+    std::cout << "Symulacja rozpoczeta.\n";
 }
 
 void Symulacja::stop() {
@@ -159,7 +159,7 @@ double Symulacja::symulujKrok(double czas) {
         return 0.0;
     }
     if (!sygnal || !sprzerzenie) {
-        std::cerr << "Błąd: Brak sygnału lub sprzężenia zwrotnego!\n";
+        std::cerr << "Blad: Brak sygnalu lub sprzezenia zwrotnego!\n";
         return 0.0;
     }
     double wartosc_zadana = sygnal->generuj(czas);

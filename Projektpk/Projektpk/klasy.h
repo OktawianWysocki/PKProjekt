@@ -89,13 +89,13 @@ class Sygnal {
 private:
     double amplituda;    // Amplituda sygnału
     double okres;        // Okres sygnału (dla sinusa i prostokąta)
-    double wypełnienie;  // Wypełnienie sygnału prostokątnego (0 - 1)
+    double wypelnienie;  // Wypełnienie sygnału prostokątnego (0 - 1)
     double czas_aktywacji; // Moment aktywacji skoku jednostkowego
     std::function<double(double)> funkcja_sygnalu; // Wybrana funkcja generująca sygnał
 
 public:
     // Konstruktor
-    Sygnal(double amplituda = 1.0, double okres = 1.0, double wypełnienie = 0.5, double czas_aktywacji = 0.0);
+    Sygnal(double amplituda = 1.0, double okres = 1.0, double wypelnienie = 0.5, double czas_aktywacji = 0.0);
 
     // Ustawienie sygnału jako skok jednostkowy
     void ustawSkok();
