@@ -12,7 +12,7 @@ private:
     std::vector<double> bufor_wyjscia; // Bufor sygnału wyjściowego (y)
 
 public:
-    // Konstruktor klasy ARX
+    
     Arx(const std::vector<double>& a, const std::vector<double>& b, int k);
 
     // Metoda wykonująca pojedynczy krok symulacji
@@ -34,10 +34,10 @@ private:
     double poprzedni_uchyb;  // Ostatnia wartość uchybu (do różniczkowania)
 
 public:
-    // Konstruktor
+    
     PID(double kp, double ti, double td);
 
-    // Funkcje obliczające poszczególne składowe
+    
     double obliczP(double uchyb) const;        // Składowa proporcjonalna
     double obliczI(double uchyb);              // Składowa całkująca
     double obliczD(double uchyb);              // Składowa różniczkująca
@@ -63,7 +63,7 @@ private:
     double poprzednie_y;   // Wartość zmierzona (𝑦̂𝑖 = 𝑦𝑖−1)
 
 public:
-    // Konstruktor
+    
     Sprzerzenie(Arx* model, PID* pid, double wartosc_zadana);
 
     // Oblicza uchyb regulacji
@@ -94,7 +94,7 @@ private:
     std::function<double(double)> funkcja_sygnalu; // Wybrana funkcja generująca sygnał
 
 public:
-    // Konstruktor
+    
     Sygnal(double amplituda = 1.0, double okres = 1.0, double wypelnienie = 0.5, double czas_aktywacji = 0.0);
 
     // Ustawienie sygnału jako skok jednostkowy
@@ -123,7 +123,7 @@ private:
     bool aktywna;             // Flaga aktywności symulacji
 
 public:
-    // Konstruktor
+    
     Symulacja(Sprzerzenie* sprzerzenie, Sygnal* sygnal, double krok_czasowy = 0.1);
 
     // Rozpoczęcie symulacji
