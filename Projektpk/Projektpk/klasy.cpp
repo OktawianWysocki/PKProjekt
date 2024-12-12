@@ -102,10 +102,68 @@ double Sprzerzenie::wykonajKrok(double aktualne_y) {
     return nowe_y; // Zwraca nową wartość regulowaną
 }
 
+// Implementacja klasy Sygnał
+Sygnal::Sygnal(double amplituda, double okres, double wypelnienie, double czas_aktywacji)
+    : amplituda(amplituda), okres(okres), wypelnienie(wypelnienie), czas_aktywacji(czas_aktywacji) {
+    ustawSkok(); // Domyślnie ustawiony skok jednostkowy
+}
 
+void Sygnal::ustawSkok() {
+    funkcja_sygnalu = [this](double t) {
+        return t >= czas_aktywacji ? amplituda : 0.0;
+        };
+}
 
+void Sygnal::ustawSinus() {
+    funkcja_sygnalu = [this](double t) {
+        return amplituda * std::sin((2.0 * M_PI / okres) * t);
+        };
+}
 
+void Sygnal::ustawProstokat() {
+    funkcja_sygnalu = [this](double t) {
+        double modulo = std::fmod(t, okres);
+        return (modulo / okres) < wypelnienie ? amplituda : 0.0;
+        };
+}
 
+double Sygnal::generuj(double t) const {
+    return funkcja_sygnalu(t);
+}
+
+// Implementacja klasy Symulacja
+Symulacja::Symulacja(Sprzerzenie* sprzerzenie, Sygnal* sygnal, double krok_czasowy)
+    : sprzerzenie(sprzerzenie), sygnal(sygnal), krok_czasowy(krok_czasowy), aktywna(false) {}
+
+void Symulacja::start() {
+    aktywna = true;
+    std::cout << "Symulacja rozpoczęta.\n";
+}
+
+void Symulacja::stop() {
+    aktywna = false;
+    std::cout << "Symulacja zatrzymana.\n";
+}
+
+void Symulacja::reset() {
+    sprzerzenie->reset();
+    std::cout << "Symulacja zresetowana.\n";
+}
+
+double Symulacja::symulujKrok(double czas) {
+    if (!aktywna) {
+        std::cerr << "Symulacja nie jest aktywna!\n";
+        return 0.0;
+    }
+    double wartosc_zadana = sygnal->generuj(czas);
+    double wynik = sprzerzenie->wykonajKrok(wartosc_zadana);
+    return wynik;
+}
+
+void Symulacja::ustawKrokCzasowy(double nowy_krok) {
+    krok_czasowy = nowy_krok;
+    std::cout << "Nowy krok czasowy: " << krok_czasowy << "\n";
+}
 
 
 

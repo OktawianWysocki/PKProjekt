@@ -74,3 +74,68 @@ public:
 };
 
 #endif // SPRZERZENIE_H
+
+#ifndef SYGNAL_H
+#define SYGNAL_H
+
+#include <cmath>
+#include <functional>
+
+class Sygnal {
+private:
+    double amplituda;    // Amplituda sygnału
+    double okres;        // Okres sygnału (dla sinusa i prostokąta)
+    double wypelnienie;  // Wypełnienie sygnału prostokątnego (0 - 1)
+    double czas_aktywacji; // Moment aktywacji skoku jednostkowego
+    std::function<double(double)> funkcja_sygnalu; // Wybrana funkcja generująca sygnał
+
+public:
+    // Konstruktor
+    Sygnal(double amplituda = 1.0, double okres = 1.0, double wypełnienie = 0.5, double czas_aktywacji = 0.0);
+
+    // Ustawienie sygnału jako skok jednostkowy
+    void ustawSkok();
+
+    // Ustawienie sygnału sinusoidalnego
+    void ustawSinus();
+
+    // Ustawienie sygnału prostokątnego
+    void ustawProstokat();
+
+    // Generowanie wartości sygnału w danym momencie czasowym
+    double generuj(double t) const;
+};
+
+#endif // SYGNAL_H
+
+#ifndef SYMULACJA_H
+#define SYMULACJA_H
+
+class Symulacja {
+private:
+    Sprzerzenie* sprzerzenie; // Obiekt sprzężenia zwrotnego
+    Sygnal* sygnal;           // Obiekt sygnału wartości zadanej
+    double krok_czasowy;      // Krok czasowy symulacji
+    bool aktywna;             // Flaga aktywności symulacji
+
+public:
+    // Konstruktor
+    Symulacja(Sprzerzenie* sprzerzenie, Sygnal* sygnal, double krok_czasowy = 0.1);
+
+    // Rozpoczęcie symulacji
+    void start();
+
+    // Zatrzymanie symulacji
+    void stop();
+
+    // Reset symulacji
+    void reset();
+
+    // Wykonanie kroku symulacji
+    double symulujKrok(double czas);
+
+    // Ustawienie nowego kroku czasowego
+    void ustawKrokCzasowy(double nowy_krok);
+};
+
+#endif // SYMULACJA_H
