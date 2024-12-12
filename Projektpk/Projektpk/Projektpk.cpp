@@ -1,4 +1,7 @@
 #include <iostream>
+#include <vector>
+#include <cmath>
+#include <functional>
 #include "KLASY.H"
 
 int main() {
