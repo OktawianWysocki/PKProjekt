@@ -1,7 +1,9 @@
+#include <vector>
+#include <cmath>
+#include <functional>
+
 #ifndef ARX_H
 #define ARX_H
-
-#include <vector>
 
 class Arx {
 private:
@@ -77,9 +79,6 @@ public:
 
 #ifndef SYGNAL_H
 #define SYGNAL_H
-
-#include <cmath>
-#include <functional>
 
 #ifndef M_PI
 #define M_PI 3.14159265358979323846
