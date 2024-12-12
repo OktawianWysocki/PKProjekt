@@ -1,5 +1,5 @@
 #include <iostream>
-#include "KLASY.H"
+#include "klasy.h"
 
 int main() {
     // Tworzenie obiektu ARX z przykładowymi współczynnikami
@@ -24,7 +24,7 @@ int main() {
     double czas = 0.0;
     for (int i = 0; i < 100; ++i) { // 100 kroków symulacji
         double wynik = symulacja.symulujKrok(czas);
-        std::cout << "Czas: " << czas << " s, Wyjscie: " << wynik << std::endl;
+        std::cout << "Czas: " << czas << " s, Wyjście: " << wynik << std::endl;
         czas += 0.1; // Krok czasowy
     }
 

@@ -81,11 +81,15 @@ public:
 #include <cmath>
 #include <functional>
 
+#ifndef M_PI
+#define M_PI 3.14159265358979323846
+#endif
+
 class Sygnal {
 private:
     double amplituda;    // Amplituda sygnału
     double okres;        // Okres sygnału (dla sinusa i prostokąta)
-    double wypelnienie;  // Wypełnienie sygnału prostokątnego (0 - 1)
+    double wypełnienie;  // Wypełnienie sygnału prostokątnego (0 - 1)
     double czas_aktywacji; // Moment aktywacji skoku jednostkowego
     std::function<double(double)> funkcja_sygnalu; // Wybrana funkcja generująca sygnał
 
