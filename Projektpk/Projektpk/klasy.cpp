@@ -1,6 +1,8 @@
 #include "KLASY.H"
 #include <iostream>
-
+#include <vector>
+#include <cmath>
+#include <functional>
 
 
 Arx::Arx(const std::vector<double>& a, const std::vector<double>& b, int k)
